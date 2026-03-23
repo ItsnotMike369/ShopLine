@@ -16,8 +16,6 @@
             * { box-sizing: border-box; margin: 0; padding: 0; }
             body { font-family: 'Inter', sans-serif; background: #f9f9fb; color: #1a1a2e; min-height: 100vh; display: flex; flex-direction: column; }
 
-
-            /* ── Page wrapper ── */
             .page-wrap { max-width: 1100px; margin: 40px auto; padding: 0 32px; flex: 1; width: 100%; }
             .page-title { font-size: 26px; font-weight: 700; color: #1a1a2e; margin-bottom: 28px; }
 
@@ -32,10 +30,53 @@
             /* ── Cart layout ── */
             .cart-layout { display: grid; grid-template-columns: 1fr 320px; gap: 24px; align-items: start; }
 
+            /* ── Select All bar ── */
+            .select-all-bar {
+                background: #fff;
+                border: 1px solid #e8e8e8;
+                border-radius: 14px;
+                padding: 16px 24px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 12px;
+            }
+            .select-all-left { display: flex; align-items: center; gap: 12px; }
+            .select-all-label { font-size: 14px; font-weight: 600; color: #1a1a2e; }
+            .selected-count-text { font-size: 14px; color: #888; }
+
+            /* ── Custom checkbox ── */
+            .custom-checkbox {
+                width: 20px;
+                height: 20px;
+                border: 2px solid #d0d0d0;
+                border-radius: 5px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+                transition: border-color 0.15s, background 0.15s;
+                background: #fff;
+            }
+            .custom-checkbox.checked {
+                background: #1a1a2e;
+                border-color: #1a1a2e;
+            }
+            .custom-checkbox.indeterminate {
+                background: #1a1a2e;
+                border-color: #1a1a2e;
+            }
+            .custom-checkbox svg { display: none; }
+            .custom-checkbox.checked svg,
+            .custom-checkbox.indeterminate svg { display: block; }
+
             /* ── Cart items ── */
+            .cart-items-list { display: flex; flex-direction: column; gap: 0; }
             .cart-items { background: #fff; border: 1px solid #e8e8e8; border-radius: 14px; overflow: hidden; }
-            .cart-item { display: flex; align-items: center; gap: 18px; padding: 20px 24px; border-bottom: 1px solid #f0f0f0; }
+            .cart-item { display: flex; align-items: center; gap: 18px; padding: 20px 24px; border-bottom: 1px solid #f0f0f0; transition: background 0.1s; }
             .cart-item:last-child { border-bottom: none; }
+            .cart-item-checkbox { flex-shrink: 0; }
             .cart-item-img { width: 84px; height: 84px; border-radius: 10px; overflow: hidden; background: #f5f5f5; flex-shrink: 0; }
             .cart-item-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
             .cart-item-img-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
@@ -43,18 +84,33 @@
             .cart-item-info { flex: 1; }
             .cart-item-name { font-size: 15px; font-weight: 600; color: #1a1a2e; margin-bottom: 4px; }
             .cart-item-unit { font-size: 13px; color: #888; }
-            .cart-item-controls { display: flex; align-items: center; gap: 16px; }
-            .qty-control { display: flex; align-items: center; gap: 0; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; }
+            .cart-item-controls { display: flex; align-items: center; gap: 16px; margin-top: 10px; }
+            .qty-control { display: flex; align-items: center; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; }
             .qty-btn { width: 34px; height: 34px; background: #fff; border: none; cursor: pointer; font-size: 16px; color: #444; display: flex; align-items: center; justify-content: center; transition: background 0.12s; font-family: 'Inter', sans-serif; }
             .qty-btn:hover { background: #f5f5f5; }
             .qty-num { width: 36px; text-align: center; font-size: 14px; font-weight: 600; color: #1a1a2e; background: #fff; border: none; border-left: 1px solid #e0e0e0; border-right: 1px solid #e0e0e0; padding: 0; line-height: 34px; }
             .btn-remove { display: flex; align-items: center; gap: 5px; font-size: 13px; color: #e53e3e; background: none; border: none; cursor: pointer; font-family: 'Inter', sans-serif; padding: 0; transition: color 0.12s; }
             .btn-remove:hover { color: #c53030; }
-            .cart-item-price { font-size: 16px; font-weight: 700; color: #1a1a2e; min-width: 90px; text-align: right; }
+            .cart-item-price { font-size: 16px; font-weight: 700; color: #1a1a2e; min-width: 100px; text-align: right; }
+
+            /* dimmed when unchecked */
+            .cart-item.unselected { opacity: 0.5; }
 
             /* ── Order summary ── */
             .order-summary { background: #fff; border: 1px solid #e8e8e8; border-radius: 14px; padding: 24px; }
-            .order-summary h3 { font-size: 17px; font-weight: 700; color: #1a1a2e; margin-bottom: 20px; }
+            .order-summary h3 { font-size: 17px; font-weight: 700; color: #1a1a2e; margin-bottom: 16px; }
+
+            .selected-badge {
+                background: #eef2ff;
+                color: #4f6ef7;
+                font-size: 13px;
+                font-weight: 500;
+                border-radius: 8px;
+                padding: 10px 14px;
+                margin-bottom: 18px;
+                text-align: center;
+            }
+
             .summary-row { display: flex; justify-content: space-between; font-size: 14px; color: #555; margin-bottom: 12px; }
             .summary-row.total { font-size: 16px; font-weight: 700; color: #1a1a2e; border-top: 1px solid #f0f0f0; padding-top: 14px; margin-top: 6px; }
             .summary-row span:last-child { font-weight: 500; }
@@ -62,6 +118,7 @@
             .free-shipping { color: #22a05a; font-weight: 600; }
             .btn-checkout { display: block; width: 100%; padding: 14px; background: #1a1a2e; color: #fff; font-size: 14px; font-weight: 600; border: none; border-radius: 8px; cursor: pointer; font-family: 'Inter', sans-serif; text-align: center; text-decoration: none; transition: background 0.15s; margin-top: 18px; }
             .btn-checkout:hover { background: #2d2d4e; }
+            .btn-checkout:disabled { background: #aaa; cursor: not-allowed; }
             .btn-continue-shop { display: block; width: 100%; padding: 13px; background: #fff; color: #1a1a2e; font-size: 14px; font-weight: 600; border: 1px solid #e0e0e0; border-radius: 8px; cursor: pointer; font-family: 'Inter', sans-serif; text-align: center; text-decoration: none; transition: border-color 0.15s; margin-top: 10px; }
             .btn-continue-shop:hover { border-color: #aaa; }
             .summary-badges { margin-top: 20px; border-top: 1px solid #f0f0f0; padding-top: 16px; display: flex; flex-direction: column; gap: 8px; }
@@ -96,7 +153,6 @@
             <h1 class="page-title">Shopping Cart</h1>
 
             @if(empty($cart))
-                <!-- Empty cart state -->
                 <div class="empty-cart">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 0 0-8 0v4M5 9h14l1 12H4L5 9z"/>
@@ -107,48 +163,78 @@
                 </div>
             @else
                 @php
-                    $subtotal = array_sum(array_map(fn($i) => $i['price'] * $i['quantity'], $cart));
-                    $tax      = $subtotal * 0.08;
-                    $total    = $subtotal + $tax;
+                    $cartCount = count($cart);
+                    $subtotal  = array_sum(array_map(fn($i) => $i['price'] * $i['quantity'], $cart));
+                    $tax       = $subtotal * 0.08;
+                    $total     = $subtotal + $tax;
                 @endphp
 
                 <div class="cart-layout">
-                    <!-- Cart Items -->
-                    <div class="cart-items" id="cart-items-container">
-                        @foreach($cart as $productId => $item)
-                        <div class="cart-item" id="cart-item-{{ $productId }}" data-id="{{ $productId }}">
-                            <div class="cart-item-img">
-                                @if($item['image'])
-                                    <img src="{{ $item['image'] }}" alt="{{ $item['name'] }}">
-                                @else
-                                    <div class="cart-item-img-placeholder">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 0 1 2.828 0L16 16m-2-2l1.586-1.586a2 2 0 0 1 2.828 0L20 14m-6-6h.01M6 20h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2z"/></svg>
-                                    </div>
-                                @endif
-                            </div>
-                            <div class="cart-item-info">
-                                <div class="cart-item-name">{{ $item['name'] }}</div>
-                                <div class="cart-item-unit">&#8369;{{ number_format($item['price'], 2) }} each</div>
-                                <div class="cart-item-controls" style="margin-top:10px;">
-                                    <div class="qty-control">
-                                        <button class="qty-btn qty-minus" data-id="{{ $productId }}">&#8722;</button>
-                                        <span class="qty-num" id="qty-{{ $productId }}">{{ $item['quantity'] }}</span>
-                                        <button class="qty-btn qty-plus" data-id="{{ $productId }}">&#43;</button>
-                                    </div>
-                                    <button class="btn-remove" data-id="{{ $productId }}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0 1 16.138 21H7.862a2 2 0 0 1-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v3M4 7h16"/></svg>
-                                        Remove
-                                    </button>
+                    <!-- Left column: select-all bar + items -->
+                    <div>
+                        <!-- Select All bar -->
+                        <div class="select-all-bar">
+                            <div class="select-all-left">
+                                <div class="custom-checkbox checked" id="select-all-box">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="3">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                                    </svg>
                                 </div>
+                                <span class="select-all-label">Select All ({{ $cartCount }} {{ $cartCount === 1 ? 'item' : 'items' }})</span>
                             </div>
-                            <div class="cart-item-price" id="item-total-{{ $productId }}">&#8369;{{ number_format($item['price'] * $item['quantity'], 2) }}</div>
+                            <span class="selected-count-text" id="selected-count-text">{{ $cartCount }} of {{ $cartCount }} selected</span>
                         </div>
-                        @endforeach
+
+                        <!-- Cart Items -->
+                        <div class="cart-items" id="cart-items-container">
+                            @foreach($cart as $productId => $item)
+                            <div class="cart-item" id="cart-item-{{ $productId }}" data-id="{{ $productId }}"
+                                 data-price="{{ $item['price'] }}" data-qty="{{ $item['quantity'] }}">
+                                <div class="cart-item-checkbox">
+                                    <div class="custom-checkbox checked item-checkbox" data-id="{{ $productId }}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="3">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="cart-item-img">
+                                    @if($item['image'])
+                                        <img src="{{ $item['image'] }}" alt="{{ $item['name'] }}">
+                                    @else
+                                        <div class="cart-item-img-placeholder">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 0 1 2.828 0L16 16m-2-2l1.586-1.586a2 2 0 0 1 2.828 0L20 14m-6-6h.01M6 20h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2z"/></svg>
+                                        </div>
+                                    @endif
+                                </div>
+                                <div class="cart-item-info">
+                                    <div class="cart-item-name">{{ $item['name'] }}</div>
+                                    <div class="cart-item-unit">&#8369;{{ number_format($item['price'], 2) }} each</div>
+                                    <div class="cart-item-controls">
+                                        <div class="qty-control">
+                                            <button class="qty-btn qty-minus" data-id="{{ $productId }}">&#8722;</button>
+                                            <span class="qty-num" id="qty-{{ $productId }}">{{ $item['quantity'] }}</span>
+                                            <button class="qty-btn qty-plus" data-id="{{ $productId }}">&#43;</button>
+                                        </div>
+                                        <button class="btn-remove" data-id="{{ $productId }}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0 1 16.138 21H7.862a2 2 0 0 1-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v3M4 7h16"/></svg>
+                                            Remove
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="cart-item-price" id="item-total-{{ $productId }}">&#8369;{{ number_format($item['price'] * $item['quantity'], 2) }}</div>
+                            </div>
+                            @endforeach
+                        </div>
                     </div>
 
                     <!-- Order Summary -->
                     <div class="order-summary">
                         <h3>Order Summary</h3>
+
+                        <div class="selected-badge" id="selected-badge">
+                            {{ $cartCount }} {{ $cartCount === 1 ? 'item' : 'items' }} selected for checkout
+                        </div>
+
                         <div class="summary-row">
                             <span>Subtotal</span>
                             <span id="summary-subtotal">&#8369;{{ number_format($subtotal, 2) }}</span>
@@ -166,7 +252,9 @@
                             <span id="summary-total">&#8369;{{ number_format($total, 2) }}</span>
                         </div>
 
-                        <a href="{{ route('checkout') }}" class="btn-checkout">Proceed to Checkout</a>
+                        <button id="btn-checkout" class="btn-checkout" onclick="proceedToCheckout()">
+                            Proceed to Checkout ({{ $cartCount }})
+                        </button>
                         <a href="{{ route('shop') }}" class="btn-continue-shop">Continue Shopping</a>
 
                         <div class="summary-badges">
@@ -193,18 +281,103 @@
         <script>
             const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-            function updateSummary(data) {
-                const el = id => document.getElementById(id);
-                if (el('summary-subtotal')) el('summary-subtotal').textContent = '₱' + data.subtotal;
-                if (el('summary-tax'))      el('summary-tax').textContent      = '₱' + data.tax;
-                if (el('summary-total'))    el('summary-total').textContent    = '₱' + data.total;
+            /* ── Selection state ── */
+            const selectedIds = new Set(
+                [...document.querySelectorAll('.item-checkbox')].map(el => el.dataset.id)
+            );
 
+            function formatPHP(value) {
+                return '₱' + value.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            }
+
+            function recalcSummary() {
+                let subtotal = 0;
+                document.querySelectorAll('.cart-item').forEach(row => {
+                    const id  = row.dataset.id;
+                    const qty = parseInt(document.getElementById('qty-' + id).textContent);
+                    const price = parseFloat(row.dataset.price);
+                    if (selectedIds.has(id)) subtotal += price * qty;
+                });
+                const tax   = subtotal * 0.08;
+                const total = subtotal + tax;
+
+                document.getElementById('summary-subtotal').textContent = formatPHP(subtotal);
+                document.getElementById('summary-tax').textContent      = formatPHP(tax);
+                document.getElementById('summary-total').textContent    = formatPHP(total);
+
+                const count    = selectedIds.size;
+                const total_items = document.querySelectorAll('.cart-item').length;
+                const word     = count === 1 ? 'item' : 'items';
+
+                document.getElementById('selected-badge').textContent      = count + ' ' + word + ' selected for checkout';
+                document.getElementById('selected-count-text').textContent = count + ' of ' + total_items + ' selected';
+                document.getElementById('btn-checkout').textContent        = 'Proceed to Checkout (' + count + ')';
+                document.getElementById('btn-checkout').disabled           = count === 0;
+
+                // Select All checkbox state
+                const allBox = document.getElementById('select-all-box');
+                allBox.classList.remove('checked', 'indeterminate');
+                allBox.querySelector('svg').style.display = 'none';
+                if (count === 0) {
+                    // nothing
+                } else if (count === total_items) {
+                    allBox.classList.add('checked');
+                    allBox.querySelector('svg').style.display = 'block';
+                } else {
+                    allBox.classList.add('indeterminate');
+                    // show a dash for indeterminate
+                    allBox.querySelector('svg').style.display = 'block';
+                    allBox.querySelector('svg path').setAttribute('d', 'M5 12h14');
+                }
+            }
+
+            function setItemChecked(id, checked) {
+                const box  = document.querySelector('.item-checkbox[data-id="' + id + '"]');
+                const row  = document.getElementById('cart-item-' + id);
+                if (checked) {
+                    selectedIds.add(id);
+                    box.classList.add('checked');
+                    row.classList.remove('unselected');
+                } else {
+                    selectedIds.delete(id);
+                    box.classList.remove('checked');
+                    row.classList.add('unselected');
+                }
+                recalcSummary();
+            }
+
+            // Item checkbox clicks
+            document.querySelectorAll('.item-checkbox').forEach(box => {
+                box.addEventListener('click', function () {
+                    const id = this.dataset.id;
+                    setItemChecked(id, !selectedIds.has(id));
+                });
+            });
+
+            // Select All click
+            document.getElementById('select-all-box').addEventListener('click', function () {
+                const allIds = [...document.querySelectorAll('.cart-item')].map(r => r.dataset.id);
+                const allSelected = allIds.every(id => selectedIds.has(id));
+                allIds.forEach(id => setItemChecked(id, !allSelected));
+            });
+
+            function proceedToCheckout() {
+                if (selectedIds.size === 0) return;
+                const params = new URLSearchParams();
+                selectedIds.forEach(id => params.append('selected[]', id));
+                window.location.href = '{{ route('checkout') }}?' + params.toString();
+            }
+
+            /* ── Qty controls ── */
+            function updateSummaryFromServer(data, id) {
+                const row = document.getElementById('cart-item-' + id);
+                if (row) row.dataset.qty = parseInt(document.getElementById('qty-' + id).textContent);
                 // update cart badge
                 const badge = document.querySelector('.cart-badge');
                 if (badge) badge.textContent = data.count;
+                recalcSummary();
             }
 
-            // Qty minus
             document.querySelectorAll('.qty-minus').forEach(btn => {
                 btn.addEventListener('click', function () {
                     const id  = this.dataset.id;
@@ -217,12 +390,12 @@
                     }).then(r => r.json()).then(data => {
                         document.getElementById('qty-' + id).textContent = qty;
                         document.getElementById('item-total-' + id).textContent = '₱' + data.itemTotal;
-                        updateSummary(data);
+                        document.getElementById('cart-item-' + id).dataset.qty = qty;
+                        updateSummaryFromServer(data, id);
                     });
                 });
             });
 
-            // Qty plus
             document.querySelectorAll('.qty-plus').forEach(btn => {
                 btn.addEventListener('click', function () {
                     const id  = this.dataset.id;
@@ -234,7 +407,8 @@
                     }).then(r => r.json()).then(data => {
                         document.getElementById('qty-' + id).textContent = qty;
                         document.getElementById('item-total-' + id).textContent = '₱' + data.itemTotal;
-                        updateSummary(data);
+                        document.getElementById('cart-item-' + id).dataset.qty = qty;
+                        updateSummaryFromServer(data, id);
                     });
                 });
             });
@@ -247,10 +421,13 @@
                         method: 'DELETE',
                         headers: { 'X-CSRF-TOKEN': csrfToken, 'Accept': 'application/json' }
                     }).then(r => r.json()).then(data => {
+                        selectedIds.delete(id);
                         const row = document.getElementById('cart-item-' + id);
                         if (row) row.remove();
-                        updateSummary(data);
-                        if (data.empty) location.reload();
+                        const badge = document.querySelector('.cart-badge');
+                        if (badge) badge.textContent = data.count;
+                        if (data.empty) { location.reload(); return; }
+                        recalcSummary();
                     });
                 });
             });

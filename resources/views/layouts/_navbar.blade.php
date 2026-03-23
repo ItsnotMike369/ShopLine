@@ -1,3 +1,15 @@
+<script>
+    (function () {
+        var existing = document.querySelector("link[rel~='icon']");
+        if (!existing) {
+            var link = document.createElement('link');
+            link.rel = 'icon';
+            link.type = 'image/png';
+            link.href = '/images/Shopline Logo.png';
+            document.head.appendChild(link);
+        }
+    })();
+</script>
 <style>
     /* ── ShopLine Navbar ── */
     .shopnav { position: sticky; top: 0; z-index: 100; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
@@ -49,7 +61,7 @@
     <!-- Middle row -->
     <div class="shopnav-middle">
         <a href="{{ url('/') }}" class="shopnav-brand">
-            <img src="{{ asset('images/Shopline Logo.png') }}" alt="ShopLine Logo" style="height:40px;width:auto;">
+            <img src="{{ asset('images/Shopline Logo.png') }}" alt="ShopLine" style="height:40px;width:auto;">
             ShopLine
         </a>
 
