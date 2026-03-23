@@ -14,8 +14,6 @@ nixPkgs = [
     "php83Extensions.gd",
     "php83Extensions.intl",
     "php83Extensions.zip",
-    "nodejs_22",
-    "nodePackages.npm"
 ]
 
 [phases.install]
