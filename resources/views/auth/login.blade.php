@@ -41,12 +41,13 @@
             .auth-tab.active { background: #fff; color: #1a1a2e; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
 
             /* ── Form ── */
-            .form-group { margin-bottom: 16px; }
-            .form-label { display: block; font-size: 13px; font-weight: 500; color: #444; margin-bottom: 6px; }
+            .form-group { margin-bottom: 14px; }
+            .form-label { display: none; }
             .form-input-wrap { position: relative; }
-            .form-input-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #aaa; width: 16px; height: 16px; pointer-events: none; }
-            .form-input { width: 100%; padding: 10px 14px 10px 38px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 14px; outline: none; color: #1a1a2e; background: #fafafa; transition: border-color 0.2s; font-family: 'Inter', sans-serif; }
-            .form-input:focus { border-color: #888; background: #fff; }
+            .form-input-wrap svg { display: none; }
+            .form-input { width: 100%; padding: 14px 18px; border: 1.5px solid #dde1e7; border-radius: 12px; font-size: 15px; outline: none; color: #1a1a2e; background: #fff; transition: border-color 0.2s, box-shadow 0.2s; font-family: 'Inter', sans-serif; }
+            .form-input::placeholder { color: #8a8f9b; font-size: 15px; }
+            .form-input:focus { border-color: #b0b8c9; box-shadow: 0 0 0 3px rgba(100,116,139,0.08); background: #fff; }
 
             /* ── Footer row of form ── */
             .form-footer { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
@@ -152,18 +153,14 @@
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="form-group">
-                        <label class="form-label">Email</label>
                         <div class="form-input-wrap">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 0 0 2.22 0L21 8M5 19h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2z"/></svg>
-                            <input class="form-input" type="email" name="email" placeholder="your.email@example.com" value="{{ old('email') }}" required autofocus>
+                            <input class="form-input" type="text" name="login_id" placeholder="Email or mobile number" value="{{ old('login_id') }}" required autofocus autocomplete="username">
                         </div>
-                        @error('email')<div class="alert-error">{{ $message }}</div>@enderror
+                        @error('login_id')<div class="alert-error">{{ $message }}</div>@enderror
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Password</label>
                         <div class="form-input-wrap">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2zm10-10V7a4 4 0 0 0-8 0v4h8z"/></svg>
-                            <input class="form-input" type="password" name="password" id="login-password" placeholder="••••••••" required>
+                            <input class="form-input" type="password" name="password" id="login-password" placeholder="Password" required>
                         </div>
                         @error('password')<div class="alert-error">{{ $message }}</div>@enderror
                     </div>

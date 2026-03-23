@@ -49,21 +49,19 @@
         .card-title { font-size: 17px; font-weight: 700; color: #1e293b; margin-bottom: 4px; }
         .card-sub   { font-size: 13px; color: #64748b; margin-bottom: 22px; }
 
-        .form-group { margin-bottom: 16px; }
-        .form-label { display: block; font-size: 13px; font-weight: 500; color: #374151; margin-bottom: 6px; }
+        .form-group { margin-bottom: 14px; }
+        .form-label { display: none; }
         .input-wrap { position: relative; }
-        .input-wrap svg.left-icon {
-            position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
-            width: 15px; height: 15px; color: #9ca3af; pointer-events: none;
-        }
+        .input-wrap svg.left-icon { display: none; }
         .form-input {
-            width: 100%; padding: 10px 14px 10px 38px;
-            border: 1.5px solid #e5e7eb; border-radius: 8px;
-            font-size: 14px; outline: none; color: #1e293b;
-            background: #f9fafb; font-family: 'Inter', sans-serif;
-            transition: border-color 0.2s;
+            width: 100%; padding: 14px 18px;
+            border: 1.5px solid #dde1e7; border-radius: 12px;
+            font-size: 15px; outline: none; color: #1e293b;
+            background: #fff; font-family: 'Inter', sans-serif;
+            transition: border-color 0.2s, box-shadow 0.2s;
         }
-        .form-input:focus { border-color: #6b7280; background: #fff; }
+        .form-input::placeholder { color: #8a8f9b; font-size: 15px; }
+        .form-input:focus { border-color: #b0b8c9; box-shadow: 0 0 0 3px rgba(100,116,139,0.08); background: #fff; }
 
         .forgot-link {
             display: inline-block; font-size: 13px; color: #475569;
@@ -139,22 +137,14 @@
             @csrf
 
             <div class="form-group">
-                <label class="form-label">Email Address</label>
                 <div class="input-wrap">
-                    <svg class="left-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                    </svg>
-                    <input class="form-input" type="email" name="email" placeholder="admin@example.com" value="{{ old('email') }}" required autofocus>
+                    <input class="form-input" type="email" name="email" placeholder="Email Address" value="{{ old('email') }}" required autofocus>
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="form-label">Password</label>
                 <div class="input-wrap">
-                    <svg class="left-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
-                    </svg>
-                    <input class="form-input" type="password" name="password" id="admin-password" placeholder="••••••••" required>
+                    <input class="form-input" type="password" name="password" id="admin-password" placeholder="Password" required>
                 </div>
             </div>
 

@@ -41,15 +41,20 @@
             .auth-tab.active { background: #fff; color: #1a1a2e; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
 
             /* ── Form ── */
-            .form-group { margin-bottom: 16px; }
-            .form-row { display: flex; gap: 12px; }
+            .form-group { margin-bottom: 14px; }
+            .form-row { display: flex; gap: 10px; }
             .form-row .form-group { flex: 1; }
-            .form-label { display: block; font-size: 13px; font-weight: 500; color: #444; margin-bottom: 6px; }
+            .section-label { display: flex; align-items: center; gap: 5px; font-size: 13px; font-weight: 600; color: #1a1a2e; margin-bottom: 8px; }
+            .section-label .help-icon { display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; border: 1.5px solid #888; border-radius: 50%; font-size: 10px; color: #888; cursor: default; flex-shrink: 0; }
+            .form-label { display: block; font-size: 13px; font-weight: 600; color: #1a1a2e; margin-bottom: 8px; }
             .form-input-wrap { position: relative; }
-            .form-input-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #aaa; width: 16px; height: 16px; pointer-events: none; }
-            .form-input { width: 100%; padding: 10px 14px 10px 38px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 14px; outline: none; color: #1a1a2e; background: #fafafa; transition: border-color 0.2s; font-family: 'Inter', sans-serif; }
-            .form-input-plain { padding-left: 14px; }
-            .form-input:focus { border-color: #888; background: #fff; }
+            .form-input { width: 100%; padding: 14px 18px; border: 1.5px solid #dde1e7; border-radius: 12px; font-size: 15px; outline: none; color: #1a1a2e; background: #fff; transition: border-color 0.2s, box-shadow 0.2s; font-family: 'Inter', sans-serif; }
+            .form-input::placeholder { color: #8a8f9b; }
+            .form-input:focus { border-color: #b0b8c9; box-shadow: 0 0 0 3px rgba(100,116,139,0.08); }
+            .form-select { width: 100%; padding: 14px 36px 14px 18px; border: 1.5px solid #dde1e7; border-radius: 12px; font-size: 15px; outline: none; color: #8a8f9b; background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 14px center; appearance: none; -webkit-appearance: none; transition: border-color 0.2s; font-family: 'Inter', sans-serif; cursor: pointer; }
+            .form-select:focus { border-color: #b0b8c9; box-shadow: 0 0 0 3px rgba(100,116,139,0.08); outline: none; color: #1a1a2e; }
+            .form-select.selected { color: #1a1a2e; }
+            .field-note { font-size: 12px; color: #555; margin-top: 6px; line-height: 1.5; }
 
             /* ── Terms ── */
             .terms-check { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: #555; margin-bottom: 20px; }
@@ -144,47 +149,89 @@
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
 
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label">First Name</label>
-                            <div class="form-input-wrap">
-                                <input class="form-input form-input-plain" type="text" name="first_name" placeholder="John" value="{{ old('first_name') }}" required autofocus>
+                    {{-- Name --}}
+                    <div class="form-group">
+                        <div class="section-label">Name</div>
+                        <div class="form-row">
+                            <div>
+                                <input class="form-input" type="text" name="first_name" placeholder="First name" value="{{ old('first_name') }}" required autofocus>
+                                @error('first_name')<div class="alert-error">{{ $message }}</div>@enderror
                             </div>
-                            @error('first_name')<div class="alert-error">{{ $message }}</div>@enderror
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Last Name</label>
-                            <div class="form-input-wrap">
-                                <input class="form-input form-input-plain" type="text" name="last_name" placeholder="Doe" value="{{ old('last_name') }}" required>
+                            <div>
+                                <input class="form-input" type="text" name="last_name" placeholder="Last name" value="{{ old('last_name') }}" required>
+                                @error('last_name')<div class="alert-error">{{ $message }}</div>@enderror
                             </div>
-                            @error('last_name')<div class="alert-error">{{ $message }}</div>@enderror
                         </div>
                     </div>
 
+                    {{-- Birthday --}}
                     <div class="form-group">
-                        <label class="form-label">Email</label>
-                        <div class="form-input-wrap">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 0 0 2.22 0L21 8M5 19h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2z"/></svg>
-                            <input class="form-input" type="email" name="email" placeholder="your.email@example.com" value="{{ old('email') }}" required>
+                        <div class="section-label">
+                            Birthday
+                            <span class="help-icon" title="Providing your birthday helps make sure you get the right experience.">?</span>
                         </div>
-                        @error('email')<div class="alert-error">{{ $message }}</div>@enderror
+                        <div class="form-row">
+                            <select class="form-select" name="birth_month" id="birth_month" onchange="this.classList.add('selected')">
+                                <option value="" disabled selected>Month</option>
+                                <option value="1" {{ old('birth_month')=='1'?'selected':'' }}>January</option>
+                                <option value="2" {{ old('birth_month')=='2'?'selected':'' }}>February</option>
+                                <option value="3" {{ old('birth_month')=='3'?'selected':'' }}>March</option>
+                                <option value="4" {{ old('birth_month')=='4'?'selected':'' }}>April</option>
+                                <option value="5" {{ old('birth_month')=='5'?'selected':'' }}>May</option>
+                                <option value="6" {{ old('birth_month')=='6'?'selected':'' }}>June</option>
+                                <option value="7" {{ old('birth_month')=='7'?'selected':'' }}>July</option>
+                                <option value="8" {{ old('birth_month')=='8'?'selected':'' }}>August</option>
+                                <option value="9" {{ old('birth_month')=='9'?'selected':'' }}>September</option>
+                                <option value="10" {{ old('birth_month')=='10'?'selected':'' }}>October</option>
+                                <option value="11" {{ old('birth_month')=='11'?'selected':'' }}>November</option>
+                                <option value="12" {{ old('birth_month')=='12'?'selected':'' }}>December</option>
+                            </select>
+                            <select class="form-select" name="birth_day" id="birth_day" onchange="this.classList.add('selected')">
+                                <option value="" disabled selected>Day</option>
+                                @for ($d = 1; $d <= 31; $d++)
+                                    <option value="{{ $d }}" {{ old('birth_day')==$d?'selected':'' }}>{{ $d }}</option>
+                                @endfor
+                            </select>
+                            <select class="form-select" name="birth_year" id="birth_year" onchange="this.classList.add('selected')">
+                                <option value="" disabled selected>Year</option>
+                                @for ($y = date('Y'); $y >= 1900; $y--)
+                                    <option value="{{ $y }}" {{ old('birth_year')==$y?'selected':'' }}>{{ $y }}</option>
+                                @endfor
+                            </select>
+                        </div>
                     </div>
 
+                    {{-- Gender --}}
                     <div class="form-group">
-                        <label class="form-label">Password</label>
-                        <div class="form-input-wrap">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2zm10-10V7a4 4 0 0 0-8 0v4h8z"/></svg>
-                            <input class="form-input" type="password" name="password" id="reg-password" placeholder="••••••••" required>
+                        <div class="section-label">
+                            Gender
+                            <span class="help-icon" title="You can change who can see your gender on your profile.">?</span>
                         </div>
+                        <select class="form-select" name="gender" onchange="this.classList.add('selected')">
+                            <option value="" disabled selected>Select your gender</option>
+                            <option value="female" {{ old('gender')=='female'?'selected':'' }}>Female</option>
+                            <option value="male" {{ old('gender')=='male'?'selected':'' }}>Male</option>
+                            <option value="other" {{ old('gender')=='other'?'selected':'' }}>Other</option>
+                        </select>
+                    </div>
+
+                    {{-- Mobile number or email --}}
+                    <div class="form-group">
+                        <div class="section-label">Mobile number or email</div>
+                        <input class="form-input" type="text" name="login_id" placeholder="Mobile number or email" value="{{ old('login_id') }}" required autocomplete="username">
+                        @error('login_id')<div class="alert-error">{{ $message }}</div>@enderror
+                        <p class="field-note">You may receive notifications from us.</p>
+                    </div>
+
+                    {{-- Password --}}
+                    <div class="form-group">
+                        <div class="section-label">Password</div>
+                        <input class="form-input" type="password" name="password" placeholder="Password" required>
                         @error('password')<div class="alert-error">{{ $message }}</div>@enderror
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">Confirm Password</label>
-                        <div class="form-input-wrap">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2zm10-10V7a4 4 0 0 0-8 0v4h8z"/></svg>
-                            <input class="form-input" type="password" name="password_confirmation" id="reg-confirm" placeholder="••••••••" required>
-                        </div>
+                        <input class="form-input" type="password" name="password_confirmation" placeholder="Confirm password" required>
                         @error('password_confirmation')<div class="alert-error">{{ $message }}</div>@enderror
                     </div>
 
