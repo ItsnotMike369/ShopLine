@@ -61,11 +61,7 @@
     <!-- Middle row -->
     <div class="shopnav-middle">
         <a href="{{ url('/') }}" class="shopnav-brand">
-            <div class="brand-icon">
-                <svg width="20" height="20" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 0 0-8 0v4M5 9h14l1 12H4L5 9z"/>
-                </svg>
-            </div>
+            <img src="{{ asset('images/shopline-logo.png') }}" alt="ShopLine" style="height:40px;width:auto;">
             ShopLine
         </a>
 
