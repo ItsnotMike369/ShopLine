@@ -15,6 +15,13 @@ class CartController extends Controller
 
     public function add(Request $request, $productId)
     {
+        if (!auth()->check()) {
+            if ($request->expectsJson()) {
+                return response()->json(['requiresLogin' => true, 'redirect' => route('login')], 401);
+            }
+            return redirect()->route('login')->with('status', 'Please sign in to add items to your cart.');
+        }
+
         $product = Product::findOrFail($productId);
         $cart = session()->get('cart', []);
 

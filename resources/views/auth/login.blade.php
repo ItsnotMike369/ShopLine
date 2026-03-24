@@ -101,7 +101,11 @@
         <!-- Navbar -->
         <nav class="navbar">
             <a href="{{ url('/') }}" class="navbar-brand">
-                <img src="{{ asset('images/shopline-logo.png') }}" alt="ShopLine" style="height:40px;width:auto;">
+                <div style="width:36px;height:36px;background:#1a1a2e;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                    <svg width="20" height="20" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 0 0-8 0v4M5 9h14l1 12H4L5 9z"/>
+                    </svg>
+                </div>
                 ShopLine
             </a>
             <div class="navbar-search">

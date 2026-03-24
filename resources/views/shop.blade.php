@@ -308,8 +308,19 @@
                     headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': csrfToken, 'Accept': 'application/json' },
                     body: JSON.stringify({})
                 })
-                .then(r => r.json())
+                .then(r => {
+                    if (r.status === 401) {
+                        return r.json().then(data => {
+                            if (data.requiresLogin) {
+                                window.location.href = data.redirect || '/login';
+                            }
+                            return null;
+                        });
+                    }
+                    return r.json();
+                })
                 .then(data => {
+                    if (!data) return;
                     if (data.success) {
                         const badge = document.getElementById('cart-badge');
                         if (badge) {
